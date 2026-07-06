@@ -1,0 +1,65 @@
+.anton-regular {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nunito {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.exo {
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.antonio {
+  font-family: "Antonio", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.allan-regular {
+  font-family: "Allan", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.allan-bold {
+  font-family: "Allan", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.smooch {
+  font-family: "Smooch Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.cabin-sketch-regular {
+  font-family: "Cabin Sketch", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cabin-sketch-bold {
+  font-family: "Cabin Sketch", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.allura {
+  font-family: "Allura", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
