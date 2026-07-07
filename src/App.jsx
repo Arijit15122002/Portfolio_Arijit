@@ -9,11 +9,35 @@ import { useEffect, useRef, useState } from "react";
 
 function App() {
   const [activeSection, setActiveSection] = useState("home");
-  const sectionsRef = useRef(["home", "experience", "work", "about", "lets-talk"]);
+  const sectionsRef = useRef([
+    "home",
+    "experience",
+    "work",
+    "about",
+    "lets-talk",
+  ]);
   const currentIndexRef = useRef(0);
   const scrollLockRef = useRef(false);
   const wheelIdleTimerRef = useRef(null);
   const swiperHoveredRef = useRef(false);
+
+  // In App.jsx, run once on mount
+  useEffect(() => {
+    const setVH = () => {
+      document.documentElement.style.setProperty(
+        "--app-height",
+        `${window.innerHeight}px`,
+      );
+    };
+
+    setVH(); // set once on load
+
+    // Only recompute on real orientation changes, NOT on every resize
+    // (mobile fires resize events when the URL bar shows/hides too —
+    // we deliberately ignore those)
+    window.addEventListener("orientationchange", setVH);
+    return () => window.removeEventListener("orientationchange", setVH);
+  }, []);
 
   // Synchronous setter (a ref updates instantly, unlike state which batches)
   const setSwiperHovered = (val) => {
@@ -39,7 +63,7 @@ function App() {
           if (idx !== -1) currentIndexRef.current = idx;
         }
       },
-      { threshold: [0.2, 0.4, 0.6, 0.8] }
+      { threshold: [0.2, 0.4, 0.6, 0.8] },
     );
 
     sectionEls.forEach((section) => observer.observe(section));

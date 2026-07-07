@@ -40,7 +40,7 @@ export default function Home({ activeSection }) {
   }, [isInView, cardControls, imageControls]);
 
   return (
-    <div ref={cardRef} className="pt-20 px-5 md:px-10 w-full h-[100dvh] flex items-center justify-center overflow-x-hidden">
+    <div ref={cardRef} className="pt-20 px-5 md:px-10 w-full h-[100svh] flex items-center justify-center overflow-x-hidden">
       <div className="w-full md:w-[90%] flex flex-col sm:flex-row items-center justify-center gap-8 md:gap-6">
         <div className="w-full h-full flex flex-col gap-18 items-center justify-center text-[#232323]">
           <div className="flex flex-col items-end tracking-wider">

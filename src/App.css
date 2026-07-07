@@ -75,3 +75,8 @@
   background: #d9ed92;
   border-radius: 999px;
 }
+
+.section-height {
+  height: 100svh; /* modern browsers, live constant */
+  height: var(--app-height, 100vh); /* fallback for older browsers */
+}
