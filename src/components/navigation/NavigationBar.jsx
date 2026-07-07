@@ -25,6 +25,8 @@ export default function NavigationBar({ activeSection }) {
     });
   };
 
+  console.log(activeSection);
+
   return (
     <div className="w-full h-18 fixed top-0 flex flex-row justify-between items-center px-3 md:px-4 lg:px-6 bg-[#f8f8f8]/50 backdrop-blur-3xl text-#232323] z-[999]">
       {/* Left Section */}

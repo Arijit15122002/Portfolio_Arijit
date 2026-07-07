@@ -44,7 +44,7 @@ export default function Home({ activeSection }) {
       <div className="w-full md:w-[90%] flex flex-col sm:flex-row items-center justify-center gap-8 md:gap-6">
         <div className="w-full h-full flex flex-col gap-18 items-center justify-center text-[#232323]">
           <div className="flex flex-col items-end tracking-wider">
-            <div className="text-9xl font-bold smooch tracking-widest">
+            <div className="text-9xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-9xl font-bold smooch tracking-wider">
               Hello!
             </div>
             <div className="text-sm smooch font-bold">
@@ -83,7 +83,7 @@ export default function Home({ activeSection }) {
         </div>
 
         <motion.div
-          className="relative w-full sm:min-w-[300px] md:min-w-[400px] lg:max-w-[480px] aspect-[480/490] overflow-hidden flex flex-row justify-center items-center"
+          className="relative min-w-[350px] sm:min-w-[400px] md:min-w-[450px] lg:min-w-[480px] aspect-[480/490] overflow-hidden flex flex-row justify-center items-center"
           initial={{ x: 600, opacity: 0 }}
         animate={cardControls}
         >
@@ -139,7 +139,7 @@ export default function Home({ activeSection }) {
             </div>
 
             <div className="absolute top-[3%] left-[5%] flex flex-col items-end">
-              <div className="anton-regular text-[#232323] text-3xl tracking-widest font-bold">
+              <div className="anton-regular text-[#232323] text-3xl lg:text-4xl tracking-widest font-bold">
                 Beyond the Code
               </div>
               <div className="text-xs font-bold antonio"> - Arijit</div>

@@ -63,3 +63,15 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.swiper-scrollbar {
+  width: 4px !important;
+  right: 8px !important;
+  background: rgba(255,255,255,0.15);
+  border-radius: 999px;
+}
+
+.swiper-scrollbar-drag {
+  background: #d9ed92;
+  border-radius: 999px;
+}
