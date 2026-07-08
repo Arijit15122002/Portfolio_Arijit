@@ -9,39 +9,17 @@ import { useEffect, useRef, useState } from "react";
 
 function App() {
   const [activeSection, setActiveSection] = useState("home");
-  const sectionsRef = useRef([
-    "home",
-    "experience",
-    "work",
-    "about",
-    "lets-talk",
-  ]);
+  const sectionsRef = useRef(["home", "experience", "work", "about", "lets-talk"]);
   const currentIndexRef = useRef(0);
   const scrollLockRef = useRef(false);
   const wheelIdleTimerRef = useRef(null);
-  const swiperHoveredRef = useRef(false);
 
-  // In App.jsx, run once on mount
-  useEffect(() => {
-    const setVH = () => {
-      document.documentElement.style.setProperty(
-        "--app-height",
-        `${window.innerHeight}px`,
-      );
-    };
+  // Points to the actual DOM node wrapping the Swiper carousel.
+  // Passed down to Experience.jsx and attached there via ref={carouselRef}.
+  const carouselRef = useRef(null);
 
-    setVH(); // set once on load
-
-    // Only recompute on real orientation changes, NOT on every resize
-    // (mobile fires resize events when the URL bar shows/hides too —
-    // we deliberately ignore those)
-    window.addEventListener("orientationchange", setVH);
-    return () => window.removeEventListener("orientationchange", setVH);
-  }, []);
-
-  // Synchronous setter (a ref updates instantly, unlike state which batches)
-  const setSwiperHovered = (val) => {
-    swiperHoveredRef.current = val;
+  const isInsideCarousel = (target) => {
+    return !!(carouselRef.current && carouselRef.current.contains(target));
   };
 
   // Keeps activeSection (nav highlighting) + currentIndexRef in sync,
@@ -63,7 +41,7 @@ function App() {
           if (idx !== -1) currentIndexRef.current = idx;
         }
       },
-      { threshold: [0.2, 0.4, 0.6, 0.8] },
+      { threshold: [0.2, 0.4, 0.6, 0.8] }
     );
 
     sectionEls.forEach((section) => observer.observe(section));
@@ -72,7 +50,6 @@ function App() {
 
   // Single source of truth for "move one section" logic
   const goToSection = (direction) => {
-    if (swiperHoveredRef.current) return false;
     if (scrollLockRef.current) return false;
 
     const sections = sectionsRef.current;
@@ -98,8 +75,11 @@ function App() {
   // Desktop / trackpad wheel navigation
   useEffect(() => {
     const handleWheel = (e) => {
+      // If the wheel event originated inside the carousel, let Swiper's
+      // own mousewheel module handle it — don't touch page scroll at all.
+      if (isInsideCarousel(e.target)) return;
+
       e.preventDefault();
-      if (swiperHoveredRef.current) return;
 
       // Every wheel tick pushes the idle timer back. The lock only releases
       // once wheel events stop for 300ms — this is what stops one trackpad
@@ -122,17 +102,23 @@ function App() {
   // Mobile touch navigation
   useEffect(() => {
     let touchStartY = 0;
+    let startedInCarousel = false;
 
     const handleTouchStart = (e) => {
       touchStartY = e.touches[0].clientY;
+      // Decide ONCE, at the moment the finger lands, and never re-check
+      // mid-gesture. This avoids the bubble-order race that a
+      // hover/hovered-flag approach runs into.
+      startedInCarousel = isInsideCarousel(e.target);
     };
 
     const handleTouchMove = (e) => {
+      if (startedInCarousel) return; // let Swiper handle its own scrolling
       e.preventDefault();
     };
 
     const handleTouchEnd = (e) => {
-      if (swiperHoveredRef.current) return;
+      if (startedInCarousel) return;
       if (scrollLockRef.current) return;
 
       const touchEndY = e.changedTouches[0].clientY;
@@ -169,7 +155,7 @@ function App() {
       </section>
 
       <section id="experience">
-        <Experience setSwiperHovered={setSwiperHovered} />
+        <Experience carouselRef={carouselRef} />
       </section>
 
       <section id="work">

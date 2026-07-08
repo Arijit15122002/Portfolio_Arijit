@@ -83,14 +83,14 @@ function SlideIndicator({ activeIndex, total, onDotClick }) {
   );
 }
 
-export default function Experience({ setSwiperHovered }) {
+export default function Experience({ carouselRef }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
 
   return (
-    <section className="w-full h-[100svh] pt-16 sm:pt-20 md:pt-24 px-4 sm:px-6 md:px-10 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-10">
+    <section className="w-full h-[100svh] pt-16 sm:pt-20 md:pt-24 px-4 sm:px-6 md:px-4 lg:px-10 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-10">
       {/* Left Card */}
-      <div className="w-full flex flex-col md:flex-row items-center gap-6">
+      <div className="w-full md:w-1/2 flex flex-col justify-end items-center gap-6">
         <div className="w-full flex justify-center md:block md:w-auto">
           <div className="relative w-full max-w-[420px] md:min-w-[400px] aspect-[420/300]">
             {/* Right Shape */}
@@ -118,7 +118,12 @@ export default function Experience({ setSwiperHovered }) {
             {/* Bridge */}
             <svg
               className="absolute pointer-events-none"
-              style={{ left: "53.33%", top: "11.33%", width: "8.57%", height: "12%" }}
+              style={{
+                left: "53.33%",
+                top: "11.33%",
+                width: "8.57%",
+                height: "12%",
+              }}
               viewBox="-36 0 36 36"
               preserveAspectRatio="none"
             >
@@ -126,11 +131,20 @@ export default function Experience({ setSwiperHovered }) {
             </svg>
 
             <div className="absolute top-0 left-0 px-6 sm:px-8 md:px-10 py-3 sm:py-4 flex flex-row items-center gap-2 sm:gap-3">
-              <Laptop2 className="h-4 w-4 sm:h-5 sm:w-5 mt-1" strokeWidth={1.5} />
-              <div className="text-base sm:text-lg exo tracking-wider">EXPERIENCE</div>
+              <Laptop2
+                className="h-4 w-4 sm:h-5 sm:w-5 mt-1"
+                strokeWidth={1.5}
+              />
+              <div className="text-base sm:text-lg exo tracking-wider">
+                EXPERIENCE
+              </div>
             </div>
 
-            <a href="https://www.linkedin.com/in/biswas2002/" target="_blank" rel="noreferrer">
+            <a
+              href="https://www.linkedin.com/in/biswas2002/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <div className="absolute right-0 top-0 flex flex-row items-center gap-2 sm:gap-3 px-5 sm:px-6 md:px-8 py-4 sm:py-5">
                 <FaLinkedin size={28} className="sm:hidden" />
                 <FaLinkedin size={35} className="hidden sm:block" />
@@ -140,9 +154,13 @@ export default function Experience({ setSwiperHovered }) {
             </a>
 
             <div className="absolute top-[28%] left-[5%] right-[5%] font-semibold text-[#3e3e30] exo">
-              <div className="text-base sm:text-sm md:text-md lg:text-lg">Software Development Engineer</div>
+              <div className="text-base sm:text-sm md:text-md lg:text-lg">
+                Software Development Engineer
+              </div>
               <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
-                <div className="text-xs sm:text-sm">Tata Consultancy Services</div>
+                <div className="text-xs sm:text-sm">
+                  Tata Consultancy Services
+                </div>
                 <div className="text-[10px] sm:text-xs sm:pr-[5%] text-[#64644e]">
                   April 2025 - Present
                 </div>
@@ -160,13 +178,10 @@ export default function Experience({ setSwiperHovered }) {
         </div>
 
         {/* Carousel + its own indicator, side by side, mobile only */}
-        <div className="flex md:hidden w-full items-center justify-center gap-4">
+        <div className="flex w-full items-center justify-center gap-4">
           <div
-            className="h-52 w-full max-w-[500px] rounded-xl"
-            onMouseEnter={() => setSwiperHovered(true)}
-            onMouseLeave={() => setSwiperHovered(false)}
-            onTouchStart={() => setSwiperHovered(true)}
-            onTouchEnd={() => setSwiperHovered(false)}
+            ref={carouselRef}
+            className="h-64 w-full max-w-[500px] rounded-xl cursor-pointer"
           >
             <Swiper
               onSwiper={(instance) => (swiperRef.current = instance)}
@@ -174,7 +189,7 @@ export default function Experience({ setSwiperHovered }) {
               direction="vertical"
               slidesPerView={1}
               spaceBetween={40}
-              modules={[Mousewheel, Scrollbar]}
+              modules={[Mousewheel]}
               speed={800}
               mousewheel={{
                 enabled: true,
@@ -189,13 +204,20 @@ export default function Experience({ setSwiperHovered }) {
               longSwipes={false}
               shortSwipes={true}
               followFinger={false}
-              scrollbar={{ draggable: true, hide: false }}
               className="w-full h-full"
             >
-              <SwiperSlide><Slide1 /></SwiperSlide>
-              <SwiperSlide><Slide2 /></SwiperSlide>
-              <SwiperSlide><Slide3 /></SwiperSlide>
-              <SwiperSlide><Slide4 /></SwiperSlide>
+              <SwiperSlide>
+                <Slide1 />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Slide2 />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Slide3 />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Slide4 />
+              </SwiperSlide>
             </Swiper>
           </div>
 
@@ -208,13 +230,47 @@ export default function Experience({ setSwiperHovered }) {
       </div>
 
       {/* Right Card — desktop only, same swiper synced indicator */}
-      <div className="hidden md:flex w-auto flex-row items-center">
-        <div className="h-52 w-[70%] min-w-[250px] max-w-[500px] bg-[#232323]" />
-        <SlideIndicator
-          activeIndex={activeIndex}
-          total={SLIDE_COUNT}
-          onDotClick={(i) => swiperRef.current?.slideTo(i)}
-        />
+      <div className="hidden md:flex w-1/2 h-full items-center px-4">
+        <div
+          className="relative w-[clamp(320px,30vw,600px)] aspect-[280/350]"
+          style={{ "--card-w": "clamp(320px, 30vw, 600px)" }}
+        >
+          <div
+            className="absolute top-0 left-0 w-[280px] h-[350px] origin-top-left"
+            style={{ transform: "scale(calc(var(--card-w) / 280px))" }}
+          >
+            {/* Shape 1 */}
+            <div className="absolute left-0 top-[49px] w-[280px] h-[200px] bg-[#c1db87] rounded-[0px_30px_0px_30px]" />
+
+            {/* Shape 2 */}
+            <div className="absolute left-0 top-0 w-[220px] h-[50px] bg-[#c1db87] rounded-[30px_30px_0px_0px]" />
+
+            {/* Shape 3 */}
+            <div className="absolute left-[50px] top-[245px] w-[230px] h-[100px] bg-[#c1db87] rounded-[0px_0px_30px_30px]" />
+
+            {/* Bridge 1 */}
+            <svg
+              className="absolute left-[218px] top-[20px] w-[30px] h-[30px] pointer-events-none"
+              viewBox="0 0 30 30"
+              preserveAspectRatio="none"
+            >
+              <path d="M 0 0 C 0 22.5 6 30 30 30 H 0 Z" fill="#c1db87" />
+            </svg>
+
+            {/* Bridge 2 */}
+            <svg
+              className="absolute left-[21px] top-[248px] w-[30px] h-[30px] pointer-events-none"
+              viewBox="-30 -30 30 30"
+              preserveAspectRatio="none"
+            >
+              <path d="M 0 0 C 0 -22.5 -6 -30 -30 -30 H 0 Z" fill="#c1db87" />
+            </svg>
+
+            <div className="absolute inset-0 z-10 p-5">
+              
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
