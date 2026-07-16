@@ -92,7 +92,7 @@ export default function Home() {
                 </div>
 
                 <motion.div
-                    className="relative min-w-[80%] max-w-[90%] sm:min-w-[400px] sm:mix-w-none md:min-w-[450px] lg:min-w-[480px] aspect-[480/490] overflow-hidden flex flex-row justify-center items-center"
+                    className="relative min-w-[90%] max-w-[95%] sm:min-w-[400px] sm:mix-w-none md:min-w-[450px] lg:min-w-[480px] aspect-[480/490] overflow-hidden flex flex-row justify-center items-center"
                     initial={{ x: 600, opacity: 0 }}
                     animate={cardControls}
                 >
